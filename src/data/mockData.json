@@ -1,0 +1,92 @@
+{
+  "customers": [
+    {
+      "id": 11908,
+      "name": "Ram",
+      "email": "jesus_christ@church.com",
+      "location_name": "Mumbai, Maharashtra, India"
+    },
+    {
+      "id": 11909,
+      "name": "John",
+      "email": "john_doe@example.com",
+      "location_name": "Delhi, India"
+    },
+    {
+      "id": 11910,
+      "name": "Alice",
+      "email": "alice@example.com",
+      "location_name": "Bangalore, Karnataka, India"
+    },
+    {
+      "id": 11911,
+      "name": "Bob",
+      "email": "bob@example.com",
+      "location_name": "Chennai, Tamil Nadu, India"
+    }
+  ],
+  "products": [
+    {
+      "id": 209,
+      "name": "Product A",
+      "skus": [
+        { "id": 246, "selling_price": 23, "max_retail_price": 21, "quantity_in_inventory": 1 },
+        { "id": 247, "selling_price": 32, "max_retail_price": 32, "quantity_in_inventory": 0 }
+      ]
+    },
+    {
+      "id": 210,
+      "name": "Product B",
+      "skus": [
+        { "id": 248, "selling_price": 54, "max_retail_price": 44, "quantity_in_inventory": 0 },
+        { "id": 249, "selling_price": 75, "max_retail_price": 65, "quantity_in_inventory": 5 }
+      ]
+    },
+    {
+      "id": 211,
+      "name": "Product C",
+      "skus": [
+        { "id": 250, "selling_price": 30, "max_retail_price": 25, "quantity_in_inventory": 10 }
+      ]
+    }
+  ],
+  "orders": [
+    {
+      "customer_id": 11908,
+      "items": [
+        { "sku_id": 246, "price": 23, "quantity": 2 }
+      ],
+      "paid": false,
+      "invoice_no": "Invoice - 1212121",
+      "invoice_date": "2024-05-01"
+    },
+    {
+      "customer_id": 11909,
+      "items": [
+        { "sku_id": 248, "price": 54, "quantity": 1 }
+      ],
+      "paid": true,
+      "invoice_no": "Invoice - 1212122",
+      "invoice_date": "2024-05-02"
+    },
+    {
+      "customer_id": 11910,
+      "items": [
+        { "sku_id": 247, "price": 32, "quantity": 3 },
+        { "sku_id": 249, "price": 75, "quantity": 2 }
+      ],
+      "paid": false,
+      "invoice_no": "Invoice - 1212123",
+      "invoice_date": "2024-05-03"
+    },
+    {
+      "customer_id": 11911,
+      "items": [
+        { "sku_id": 250, "price": 30, "quantity": 1 }
+      ],
+      "paid": false,
+      "invoice_no": "Invoice - 1212124",
+      "invoice_date": "2024-05-04"
+    }
+  ]
+}
