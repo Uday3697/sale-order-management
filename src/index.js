@@ -7,7 +7,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
-import {  ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import {
   ChakraBaseProvider,
   extendBaseTheme,
@@ -27,13 +27,14 @@ const theme = extendBaseTheme({
 })
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ChakraProvider>
-        <ChakraBaseProvider theme={theme}>
+
+    <ChakraProvider>
+      <ChakraBaseProvider theme={theme}>
+        <QueryClientProvider client={queryClient}>
           <App />
-        </ChakraBaseProvider>
-      </ChakraProvider>
-    </QueryClientProvider>
+        </QueryClientProvider>
+      </ChakraBaseProvider>
+    </ChakraProvider>
 
   </React.StrictMode>
 );

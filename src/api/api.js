@@ -21,22 +21,32 @@ const addOrder = async (newOrder) => {
 
 // Custom hooks
 export const useOrders = () => {
-  return useQuery(["orders"], fetchOrders);
+  return useQuery({
+    queryKey: ["orders"],
+    queryFn: fetchOrders,
+  });
 };
 
 export const useProducts = () => {
-  return useQuery(["products"], fetchProducts);
+  return useQuery({
+    queryKey: ["products"],
+    queryFn: fetchProducts,
+  });
 };
 
 export const useCustomers = () => {
-  return useQuery(["customers"], fetchCustomers);
+  return useQuery({
+    queryKey: ["customers"],
+    queryFn: fetchCustomers,
+  });
 };
 
 export const useAddOrder = () => {
   const queryClient = useQueryClient();
-  return useMutation(addOrder, {
+  return useMutation({
+    mutationFn: addOrder,
     onSuccess: () => {
-      queryClient.invalidateQueries("orders");
+      queryClient.invalidateQueries(["orders"]);
     }
   });
 };
