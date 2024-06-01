@@ -1,12 +1,13 @@
 import { Table, Thead, Tbody, Tr, Th, Td, IconButton, Spinner, Flex } from "@chakra-ui/react";
 import { useState } from "react";
 import SaleOrderForm from "./SaleOrderForm";
-import { useOrders } from "../api/api";
-
+import { useCustomers, useOrders } from "../api/api";
+import { InfoIcon } from "@chakra-ui/icons";
 const SaleOrderTable = ({ status }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentOrder, setCurrentOrder] = useState(null);
-  const { data: orders, isLoading,error } = useOrders();
+  const { data: orders, isLoading, error } = useOrders();
+  const { data: customers } = useCustomers();
 
   if (isLoading) return <Spinner size="xl" />;
 
@@ -15,12 +16,17 @@ const SaleOrderTable = ({ status }) => {
     setIsOpen(true);
   };
 
-  console.log("--------------------------orders",orders);
+  const getCustomerName = (customerId) => {
+    const customer = customers.find(customer => customer.id === customerId);
+    return customer ? customer.name : "Unknown";
+  };
+
+  console.log("--------------------------orders", orders);
 
   return (
-    <Flex >
-      
-      <Table variant="striped" size="md" colorScheme="gray">
+    <>
+
+      <Table variant="striped" colorScheme="gray">
         <Thead>
           <Tr>
             <Th border="1px" borderColor="gray.200">ID</Th>
@@ -34,12 +40,12 @@ const SaleOrderTable = ({ status }) => {
           {orders.map(order => (
             <Tr key={order.id} border="1px" borderColor="gray.200">
               <Td border="1px" borderColor="gray.200">{order.customer_id}</Td>
-              <Td border="1px" borderColor="gray.200">{order.customer_name}</Td>
+              <Td border="1px" borderColor="gray.200">{getCustomerName(order.customer_id)}</Td>
               <Td border="1px" borderColor="gray.200">{order.price}</Td>
-              <Td border="1px" borderColor="gray.200">{new Date(order.last_modified).toLocaleDateString()}</Td>
+              <Td border="1px" borderColor="gray.200">{new Date(order.invoice_date).toLocaleDateString}</Td>
               <Td border="1px" borderColor="gray.200">
                 <IconButton
-                  icon={"..."}
+                  icon={<InfoIcon />}
                   onClick={() => handleEdit(order)}
                   aria-label="Edit/View Order"
                 />
@@ -54,7 +60,7 @@ const SaleOrderTable = ({ status }) => {
         defaultValues={currentOrder}
         isReadOnly={status === "completed"}
       />
-    </Flex>
+    </>
   );
 };
 

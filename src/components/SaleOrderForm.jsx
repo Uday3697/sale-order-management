@@ -45,12 +45,12 @@ const SaleOrderForm = ({ isOpen, onClose, defaultValues, isReadOnly }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent bg="gray.800" color="white" maxW="800px" mx="auto" padding={10}>
         <ModalHeader>{isReadOnly ? "View Sale Order" : "Create/Edit Sale Order"}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <FormControl isReadOnly={isReadOnly}>
+            <FormControl isReadOnly={isReadOnly} mb={4}>
               <FormLabel>Customer</FormLabel>
               <Controller
                 name="customer_id"
@@ -67,7 +67,7 @@ const SaleOrderForm = ({ isOpen, onClose, defaultValues, isReadOnly }) => {
               />
             </FormControl>
 
-            <Accordion allowToggle>
+            <Accordion allowToggle mb={4}>
               {products?.map((product) => (
                 <AccordionItem key={product.id}>
                   <h2>
@@ -80,7 +80,7 @@ const SaleOrderForm = ({ isOpen, onClose, defaultValues, isReadOnly }) => {
                   </h2>
                   <AccordionPanel pb={4}>
                     {product.skus.map((sku) => (
-                      <HStack key={sku.id}>
+                      <HStack key={sku.id} spacing={4} mb={2}>
                         <Checkbox
                           onChange={(e) => {
                             if (e.target.checked) {
@@ -121,7 +121,7 @@ const SaleOrderForm = ({ isOpen, onClose, defaultValues, isReadOnly }) => {
               ))}
             </Accordion>
 
-            <FormControl isReadOnly={isReadOnly}>
+            <FormControl isReadOnly={isReadOnly} mb={4}>
               <FormLabel>Invoice Number</FormLabel>
               <Controller
                 name="invoice_no"
@@ -130,22 +130,24 @@ const SaleOrderForm = ({ isOpen, onClose, defaultValues, isReadOnly }) => {
               />
             </FormControl>
 
-            <FormControl isReadOnly={isReadOnly}>
+            <FormControl isReadOnly={isReadOnly} mb={4}>
               <FormLabel>Invoice Date</FormLabel>
               <Controller
                 name="invoice_date"
                 control={control}
                 render={({ field }) => (
                   <DatePicker
-                    selected={new Date(field.value)}
+                    selected={field.value ? new Date(field.value) : null}
                     onChange={(date) => field.onChange(date)}
+                    dateFormat="yyyy-MM-dd"
+                    customInput={<Input />}
                   />
                 )}
               />
             </FormControl>
 
             <ModalFooter>
-              {!isReadOnly && <Button type="submit">Save</Button>}
+              {!isReadOnly && <Button type="submit" colorScheme="blue">Save</Button>}
               <Button ml={3} onClick={onClose}>
                 Close
               </Button>
